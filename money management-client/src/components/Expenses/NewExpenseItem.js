@@ -9,7 +9,8 @@ import { getMoney, deleteMoney } from '../redux/features/dataSlice';
 
 export default function NewExpenseItem() {
   const dispatch = useDispatch();
-  const expenses = useSelector((state) => state.data.items);
+  const expenses = useSelector((state) => state.data.data.items) || [];
+  // console.log(expenses)
   const loading = useSelector((state) => state.data.loading);
   const error = useSelector((state) => state.data.error);
   const [filterYear, setFilterYear] = useState('2024');

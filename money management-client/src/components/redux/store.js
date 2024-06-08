@@ -1,8 +1,8 @@
 import { configureStore } from '@reduxjs/toolkit';
-import expenseReducer from './features/dataSlice';
+import rootReducer from './reducers/index';
 
 export const store = configureStore({
     reducer: {
-        data: expenseReducer,
+        data: rootReducer,
     },
 });

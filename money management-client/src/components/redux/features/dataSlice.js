@@ -1,20 +1,35 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-const BASE_URL = "http://localhost:9090/api/money";
+const BASE_URL = "http://localhost:9090/api/v1/money";
 
 export const postMoney = createAsyncThunk('data/postData', async (newData) => {
-  const response = await axios.post(`${BASE_URL}/upload`, newData);
+  const token = localStorage.getItem('authToken');
+  const response = await axios.post(`${BASE_URL}/user/upload`, newData, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
   return response.data;
 });
 
 export const getMoney = createAsyncThunk('data/getData', async () => {
-  const response = await axios.get(`${BASE_URL}`);
+  const token = localStorage.getItem('authToken');
+  const response = await axios.get(`${BASE_URL}/user`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
   return response.data;
 });
 
 export const deleteMoney = createAsyncThunk('data/delete', async (id) => {
-  await axios.delete(`${BASE_URL}/${id}`);
+  const token = localStorage.getItem('authToken');
+  await axios.delete(`${BASE_URL}/${id}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
   return id;
 });
 
@@ -33,7 +48,7 @@ const dataSlice = createSlice({
       })
       .addCase(postMoney.fulfilled, (state, action) => {
         state.loading = false;
-        // state.items.push(action.payload);
+        state.items.push(action.payload);
       })
       .addCase(postMoney.rejected, (state, action) => {
         state.loading = false;

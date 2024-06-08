@@ -42,7 +42,7 @@ return (
     </div>
     <div className="new-expense__control">
     <label>Amount</label>
-    <input type="number" min="0.01" step="0.01" value={enteredAmount} onChange={amountChangeHandler} />
+    <input type="number" min="0.01" step="0.01" value={enteredAmount} onChange={amountChangeHandler} placeholder="Enter Amount" />
     </div>
     <div className="new-expense__control">
     <label>Date</label>

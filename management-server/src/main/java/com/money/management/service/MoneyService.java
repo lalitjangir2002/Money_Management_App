@@ -10,5 +10,8 @@ public interface MoneyService {
     List<Money> getAllDetails();
 
     boolean deleteAmount(Long id);
+    
+    List<Money> getMoneyEntriesForUsers(String email);
+    Money addMoneyToUsers(String email,Money money);
 
 }

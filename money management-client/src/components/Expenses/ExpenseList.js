@@ -21,7 +21,7 @@ export default function ExpenseList(props) {
                             <h2>{expense.title}</h2>
                             <div className="expense-item_layout">
                             <div className='expense-item__price'>₹{expense.amount}</div>
-                            <button className='btn' onClick={() => props.onDeleteExpense(expense.id)}>Remove</button>
+                            <button className='btn' onClick={() => props.onDeleteExpense(expense.id)}>Remove</button>   
                             </div>
                         </div>
                     </Card>

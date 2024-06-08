@@ -4,6 +4,7 @@
 }
 
 .expenses-list__fallback {
+    padding: 20px;
     color: white;
     text-align: center;
 }
@@ -37,7 +38,6 @@
 
 .expense-item_layout{
     display: flex;
-    /* flex-direction: column; */
     justify-content: space-between;
     align-items: center;
     
@@ -50,9 +50,10 @@
     color: white;
     background-color: #40005d;
     border: 1px solid white;
-    padding: 0.5rem;
+    padding: 0.6rem;
     border-radius: 12px;
-    margin-bottom: 14px;
+    margin-right: 10px;
+    /* margin-bottom: 14px; */
 }
 
 .btn{
@@ -66,7 +67,7 @@
     cursor: pointer;
 }
 
-@media (min-width: 580px) {
+@media (max-width: 580px) {
     .expense-item__description {
         flex-direction: row;
         align-items: center;
@@ -81,6 +82,7 @@
     .expense-item__price {
         font-size: 1.25rem;
         padding: 0.5rem 1.5rem;
+        margin-bottom: 10px;
     }
 
     .expense-item_layout{

@@ -1,0 +1,134 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #3f3f3f;
+  margin: 0;
+  padding: 0;
+}
+
+.signup-page-container {
+  display: flex;
+  align-items: stretch;
+  height: 100vh;
+}
+
+.video-container {
+  position: relative;
+  flex: 1;
+}
+
+.video-container video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.auth-form-container {
+  flex: 1 ;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background-color: #fff;
+}
+
+.auth-form-title {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: #a5a4a4;
+}
+
+.auth-form-subtitle {
+  font-size: 1rem;
+  margin-bottom: 2rem;
+  color: #555;
+}
+
+.auth-form {
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 40px;
+  width: 100%;
+  max-width: 400px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.input-group {
+  position: relative;
+  margin-bottom: 1.5rem;
+}
+
+.auth-input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  /* background-color: #fff; */
+  outline: none;
+}
+
+.auth-label {
+  position: absolute;
+  top: -0.75rem;
+  left: 0.75rem;
+  background-color: #f9f9f9;
+  padding: 0 0.25rem;
+  font-size: 0.875rem;
+  color: #999;
+}
+
+.auth-button-container {
+  text-align: center;
+}
+
+.auth-button {
+  width: 100%;
+  padding: 0.50rem 1.25rem;
+  border: none;
+  border-radius: 6px;
+  background-color: #007bff;
+  color: #fff;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.auth-button:hover {
+  background-color: #0056b3;
+}
+
+.form-links {
+  margin-top: 10px;
+  text-align: center;
+}
+
+.auth-link {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.auth-link:hover {
+  text-decoration: underline;
+}
+
+@media only screen and (max-width: 980px) {
+  .video-container {
+    display: none;
+  }
+
+  .signup-page-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+
+  .auth-form-container {
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 8px;
+    padding: 20px;
+    width: 90%;
+    max-width: 400px;
+  }
+}

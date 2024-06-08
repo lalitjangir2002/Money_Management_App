@@ -14,7 +14,19 @@ public class Money {
     private Long id;
     private String title;
     private int amount;
-
+    
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+    
+    public User getUser() {
+        return user;
+    }
+    
+    public void setUser(User user) {
+        this.user = user;
+    }
+    
     @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate date;
 

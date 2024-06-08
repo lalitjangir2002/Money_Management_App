@@ -5,12 +5,14 @@ import com.money.management.service.MoneyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/money")
+@RequestMapping("/api/v1/money")
 @CrossOrigin(origins = "http://localhost:3000")
 public class MoneyController {
     @Autowired
@@ -37,5 +39,16 @@ public class MoneyController {
         }
         return ResponseEntity.ok().build();
     }
-
+    
+    @GetMapping("/user")
+    public ResponseEntity<List<Money>> getMoneyEntriesForUser(@AuthenticationPrincipal UserDetails userDetails) {
+        List<Money> userMoneyEntries = moneyService.getMoneyEntriesForUsers(userDetails.getUsername());
+        return new ResponseEntity<>(userMoneyEntries, HttpStatus.OK);
+    }
+    
+    @PostMapping("/user/upload")
+    public ResponseEntity<Money> addMoneyEntryForUser(@AuthenticationPrincipal UserDetails userDetails, @RequestBody Money money) {
+        Money createdMoney = moneyService.addMoneyToUsers(userDetails.getUsername(), money);
+        return new ResponseEntity<>(createdMoney, HttpStatus.CREATED);
+    }
 }

@@ -21,6 +21,8 @@
     padding: 0.5rem 2rem;
     font-weight: bold;
     border-radius: 6px;
+    color: #464545;
+    outline: none;
 }
 
 @media screen and (max-width:470px) {
