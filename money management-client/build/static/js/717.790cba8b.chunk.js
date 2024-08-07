@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkreact_complete_guide=self.webpackChunkreact_complete_guide||[]).push([[717],{9717:(e,t,c)=>{c.r(t),c.d(t,{default:()=>u});c(5043);var o=c(3003),l=c(4902),n=c(3216),s=c(579);const u=()=>{const e=(0,o.wA)(),t=(0,n.Zp)();return(0,s.jsx)("div",{className:"logout-container",children:(0,s.jsx)("button",{className:"logout-button",onClick:()=>{e((0,l.ri)()),t("/login")},children:"Logout"})})}}}]);
+//# sourceMappingURL=717.790cba8b.chunk.js.map

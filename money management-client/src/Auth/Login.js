@@ -4,14 +4,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { loginUser } from '../components/redux/features/AuthSlice';
 import CustomBackDrop from '../components/UI/CustomBackDrop';
 import CustomSnackBar from '../components/UI/CustomSnackBar';
-import video from "../assets/form_video.mp4"
-import { LoginFormSchema } from '../components/UI/formValidation/LoginFormSchema';
+import video from "../assets/form_video.mp4";
 import './login.css';
 
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const [snackbarOpen, setSnackbarOpen] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState('');
@@ -22,21 +20,33 @@ function Login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-   
-    try {
-      const validatedData = LoginFormSchema.parse({ email, password });
-      setLoading(true);
-      await dispatch(loginUser(validatedData)).unwrap();
-      setSnackbarMessage('Login successful!');
-      setSnackbarSeverity('success');
-      setSnackbarOpen(true);
-      setLoading(false);
-      navigate('/');
-    } catch (err) {
-      setError(authState.error || 'Invalid email or password. Please try again.');
-      setSnackbarMessage(authState.error || 'Invalid email or password. Please try again.');
+
+    // Basic validation
+    if (!email || !password) {
+      setSnackbarMessage('Please fill in all fields.');
       setSnackbarSeverity('error');
       setSnackbarOpen(true);
+      return;
+    }
+
+    // Email validation (simple regex)
+    if (!/\S+@\S+\.\S+/.test(email)) {
+      setSnackbarMessage('Invalid email format.');
+      setSnackbarSeverity('error');
+      setSnackbarOpen(true);
+      return;
+    }
+
+    try {
+      setLoading(true);
+      await dispatch(loginUser({ email, password })).unwrap();
+      setSnackbarMessage('Login successful!');
+      setSnackbarSeverity('success');
+      navigate('/');
+    } catch (err) {
+      setSnackbarMessage(authState.error || 'Invalid email or password. Please try again.');
+      setSnackbarSeverity('error');
+    } finally {
       setLoading(false);
     }
   };
@@ -60,8 +70,6 @@ function Login() {
         <p>Please Enter your Email and Password!</p>
 
         <form className="login_form" onSubmit={handleSubmit}>
-          {error && <p className="error-message">{error}</p>}
-          
           <div className="input-group">
             <input
               type='email'

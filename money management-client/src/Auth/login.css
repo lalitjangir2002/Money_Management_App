@@ -63,18 +63,27 @@ p {
   outline: none;
 }
 
-.input-group input:focus {
-  border-color: #007BFF;
-}
 
 .input-group label {
   position: absolute;
-  top: -10px;
+  top: 50%;
   left: 10px;
+  transform: translateY(-50%);
   background: #fff;
   padding: 0 5px;
   font-size: 14px;
   color: #999;
+  border-radius: 2px;
+  pointer-events: none;
+    transition: .5s;
+}
+
+
+.input-group input:focus~label{
+  top: 0px;
+  border-color: #007BFF;
+  font-size: 14px;
+  color: #007BFF;
 }
 
 .login_btn {

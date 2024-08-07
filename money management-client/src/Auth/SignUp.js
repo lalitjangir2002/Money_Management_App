@@ -4,7 +4,6 @@ import { useNavigate, Link } from 'react-router-dom';
 import { signupUser } from '../components/redux/features/AuthSlice';
 import CustomBackDrop from '../components/UI/CustomBackDrop';
 import video from "../assets/form_video.mp4";
-import { SignUpFormSchema } from '../components/UI/formValidation/LoginFormSchema';
 import './signup.css';
 
 function SignUp({ triggerSnackbar }) {
@@ -19,44 +18,46 @@ function SignUp({ triggerSnackbar }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // Basic validation
     if (!email || !password || !confirmPassword || !firstName || !lastName) {
       triggerSnackbar('Please fill in all fields.', 'error');
       return;
     }
 
-    
+    if (password !== confirmPassword) {
+      triggerSnackbar('Passwords do not match.', 'error');
+      return;
+    }
+
+    if (password.length < 6) {
+      triggerSnackbar('Password must be at least 6 characters long.', 'error');
+      return;
+    }
+
+    if (firstName.length < 2) {
+      triggerSnackbar('First name must be at least 2 characters long.', 'error');
+      return;
+    }
+
+    if (lastName.length < 2) {
+      triggerSnackbar('Last name must be at least 2 characters long.', 'error');
+      return;
+    }
+
+    if (!/\S+@\S+\.\S+/.test(email)) { // Simple email validation regex
+      triggerSnackbar('Invalid email. Please enter a valid email.', 'error');
+      return;
+    }
+
     try {
-      const validatedData = SignUpFormSchema.parse({
-        email,
-        password,
-        firstName,
-        lastName,
-      });
-      
-      if (password !== confirmPassword) {
-        triggerSnackbar('Passwords do not match.', 'error');
-        return;
-      }
-      
       setLoading(true);
-
-      await dispatch(signupUser(validatedData)).unwrap();
+      await dispatch(signupUser({ email, password, firstName, lastName })).unwrap();
       triggerSnackbar('Account Created Successfully, Please Login', 'success');
-
-      setLoading(false);
       navigate('/login');
     } catch (err) {
-      if (err.errors[0]?.path[0] === 'email') {
-        triggerSnackbar('Invalid email. Please enter a valid email.', 'error');
-      } else if (err.errors[0]?.path[0] === 'password') {
-        triggerSnackbar('Invalid password. Password must be at least 6 characters long.', 'error');
-      } else if (err.errors[0]?.path[0] === 'firstName') {
-        triggerSnackbar('First name is required and must be at least 2 characters long.', 'error');
-      } else if (err.errors[0]?.path[0] === 'lastName') {
-        triggerSnackbar('Last name is required and must be at least 2 characters long.', 'error');
-      } else {
-        triggerSnackbar('Signup failed. Please try again.', 'error');
-      }
+      triggerSnackbar('Signup failed. Please try again.', 'error');
+    } finally {
       setLoading(false);
     }
   };

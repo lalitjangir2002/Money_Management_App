@@ -17,8 +17,12 @@ export const loginUser = createAsyncThunk('/signin', async ({ email, password },
 export const signupUser = createAsyncThunk('/signup', async ({ email, password, firstName, lastName }, { rejectWithValue }) => {
   try {
     const response = await axios.post(`${BASE_URL}/signup`, { email, password, firstName, lastName });
+    console.log(response)
     return response.data;
   } catch (err) {
+    if (!err.response) {
+      return rejectWithValue('Network error. Please try again later.');
+    }
     return rejectWithValue(err.response.data);
   }
 });

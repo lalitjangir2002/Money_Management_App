@@ -16,7 +16,6 @@
 	
 	@Service
 	public class JWTServiceImpl implements JWTService {
-		
 		private final String SECRET_KEY = "VkhvkeJZSJ4hG07k6EPz2l6LET7878jsjnW678asdsfergbrhtrrFEFEFG";
 		
 		public String generateToken(UserDetails userDetails) {
