@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-const BASE_URL = "http://localhost:9090/api/v1/money";
+const BASE_URL = "http://13.60.185.80:9090/api/v1/money";
 
 export const postMoney = createAsyncThunk('data/postData', async (newData) => {
   const token = localStorage.getItem('authToken');

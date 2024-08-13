@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-const BASE_URL = "http://localhost:9090/api/v1/auth";
+const BASE_URL = "http://13.60.185.80:9090/api/v1/auth";
 
 export const loginUser = createAsyncThunk('/signin', async ({ email, password }, { rejectWithValue }) => {
   try {
